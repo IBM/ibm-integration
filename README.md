@@ -9,6 +9,5 @@ This repository is used to host artefacts for the different capabilities that ar
 
 ## Table of Contents
 
-- [Getting Started](#getting-started)
-    - [IBM documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration)
+- [IBM documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration)
 
