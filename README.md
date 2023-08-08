@@ -9,5 +9,6 @@ This repository is used to host artefacts for the different capabilities that ar
 
 ## Table of Contents
 
+- [Grafana dashboards samples](./kubernetes/grafana-dashboards/README.md)
 - [IBM documentation](https://www.ibm.com/docs/en/cloud-paks/cp-integration)
 
