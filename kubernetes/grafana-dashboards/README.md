@@ -5,4 +5,5 @@ This directory contains sample configuration files to help you set up cluster he
 - [ibm-api-connect.json](./ibm-api-connect.json): Sample dashboard for monitoring API Connect clusters.
 - [ibm-aspera-hsts.json](./ibm-aspera-hsts.json): Sample dashboard for monitoring IBM Aspera high-speed transfer servers.
 - [ibm-queue-manager.json](./ibm-queue-manager.json): Sample dashboard for monitoring IBM MQ queue managers.
+- [ibm-datapower.json](./ibm-datapower.json): Sample dashboard for monitoring IBM DataPower Gateways.
 - [IBM/ibm-event-automation/grafana-dashboards](https://github.com/IBM/ibm-event-automation/tree/main/event-streams/grafana-dashboards): Sample configuration files to help you set up cluster health monitoring for Event Streams.
