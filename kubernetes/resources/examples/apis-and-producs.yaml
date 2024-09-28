@@ -1,0 +1,87 @@
+apiVersion: integration.ibm.com/v1beta1
+kind: IntegrationAssembly
+metadata:
+  name: apis-and-products
+  namespace: my-namespace
+spec:
+  version: 16.1.0
+  independentResources:
+    selector:
+      matchLabels:
+        my-canvas-apis-and-products: 'true'
+---
+kind: Product
+metadata:
+  name: my-api-product
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+apiVersion: apiconnect.ibm.com/v1beta1
+spec:
+  definition:
+    product: 1.0.0
+    info:
+      title: ''
+      name: ''
+      version: '1.0'
+    plans:
+      default-plan:
+        rate-limits:
+          default:
+            value: 100/1hour
+        title: Default Plan
+        description: Default Plan
+        approval: false
+  apis:
+    apis:
+      - name: my-api-in-configmap
+      - name: my-api-in-source-control
+  share:
+    apim:
+      credentialsSecret: api-manager-credentials
+---
+kind: API
+metadata:
+  name: my-api-in-configmap
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+apiVersion: apiconnect.ibm.com/v1beta1
+spec:
+  definition:
+    configMap: my-configmap
+  share:
+    apim: {}
+---
+kind: ConfigMap
+metadata:
+  name: my-configmap
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+apiVersion: v1
+data:
+  key: value
+---
+kind: API
+metadata:
+  name: my-api-in-source-control
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+apiVersion: apiconnect.ibm.com/v1beta1
+spec:
+  definition: {}
+  share:
+    apim: {}
+---
+kind: Secret
+metadata:
+  name: api-manager-credentials
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+apiVersion: v1
+type: Opaque
+stringData:
+  key: value
