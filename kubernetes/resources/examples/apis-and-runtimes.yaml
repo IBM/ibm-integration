@@ -1,0 +1,100 @@
+apiVersion: integration.ibm.com/v1beta1
+kind: IntegrationAssembly
+metadata:
+  name: apis-and-products
+  namespace: my-namespace
+spec:
+  version: 16.1.0
+  independentResources:
+    selector:
+      matchLabels:
+        my-canvas-apis-and-products: 'true'
+---
+apiVersion: apiconnect.ibm.com/v1beta1
+kind: Product
+metadata:
+  name: my-api-product
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+spec:
+  definition:
+    product: 1.0.0
+    info:
+      title: ''
+      name: ''
+      version: '1.0'
+    plans:
+      default-plan:
+        rate-limits:
+          default:
+            value: 100/1hour
+        title: Default Plan
+        description: Default Plan
+        approval: false
+  apis:
+    apis:
+      - name: my-api
+    integrationRuntimes:
+      - name: my-runtime-1
+  share:
+    apim:
+      credentialsSecret: api-manager-credentials
+---
+apiVersion: appconnect.ibm.com/v1beta1
+kind: IntegrationRuntime
+metadata:
+  name: my-runtime-1
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+spec:
+  license: {}
+  configurations:
+    - my-configuration
+---
+apiVersion: appconnect.ibm.com/v1beta1
+kind: Configuration
+metadata:
+  name: my-configuration
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+spec:
+  type: accounts
+  data: YWNjb3VudHM6IHt9
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: api-manager-credentials
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+type: Opaque
+stringData:
+  key: value
+---
+apiVersion: appconnect.ibm.com/v1beta1
+kind: IntegrationRuntime
+metadata:
+  name: my-runtime-2
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+spec:
+  license: {}
+---
+apiVersion: apiconnect.ibm.com/v1beta1
+kind: API
+metadata:
+  name: my-api
+  namespace: my-namespace
+  labels:
+    my-canvas-apis-and-products: 'true'
+spec:
+  definition:
+    integrationRuntime:
+      name: my-runtime-2
+  share:
+    apim: {}
